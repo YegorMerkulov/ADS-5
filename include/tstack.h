@@ -13,8 +13,8 @@ class TStack {
     void push(Type value) {
       if (isFull()) {
         throw std::string("Full!");
-      } else {
-        arr[++top] = value;
+        } else {
+          arr[++top] = value;
       }
     }
     const Type& pop() {
