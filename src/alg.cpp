@@ -24,7 +24,7 @@ int getPriori(char operation) {
     default:
       return -1;
       break;
-  }  
+  }
 }
 std::string spases(const std::string& str) {
     if (2 >= str.length()) return str;
@@ -34,14 +34,14 @@ std::string spases(const std::string& str) {
         rez += ' '; rez += *it++;;
     }
     return rez;
-}      
+}
 std::string infx2pstfx(std::string inf) {
-  std::string rezult;
-  TStack<char, 100> stack11;
-  for (auto& operation : inf) {
-      int priori = getPriori(operation);
+    std::string rezult;
+    TStack<char, 100> stack11;
+    for (auto& operation : inf) {
+        int priori = getPriori(operation);
         if (priori == -1) {
-            rezult += operation;
+           rezult += operation;
         } else {
             if (stack11.get() < priori || priori == 0 || stack11.isEmpty()) {
                 stack11.push(operation);
@@ -61,8 +61,8 @@ std::string infx2pstfx(std::string inf) {
                     summa = stack11.get();
                 }
                 stack11.push(operation);
-            }
-        }
+             }
+         }   
     }
     while (!stack11.isEmpty()) {
         rezult += stack11.get();
