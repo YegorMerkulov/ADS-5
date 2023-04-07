@@ -11,28 +11,27 @@ class TStack {
  public:
     TStack() :top(-1) {}
     void push(Type value) {
-      if (isFull()) {
-        throw std::string("Full!");
-      } else {
-        arr[++top] = value;
-      }
+        if (isFull()) {
+            throw std::string("Full!");
+        } else {
+            arr[++top] = value;
+        }
     } 
     const Type& pop() {
-      if (isEmpty()) {
-        throw std::string("Empty!");
-      } else {
-        return arr[top--];
-      }
+        if (isEmpty()) {
+            throw std::string("Empty!");
+        } else {
+            return arr[top--];
+        }
     }
     const Type& get()const {
-      return arr[top];
+        return arr[top];
     }
     bool isEmpty()const {
-      return top == -1;
+        return top == -1;
     }
     bool isFull()const {
-      return top == size - 1;
+        return top == size - 1;
     }
 };  
 #endif // INCLUDE_TSTACK_H_
-
