@@ -61,15 +61,15 @@ std::string infx2pstfx(std::string inf) {
                     summa = stack11.get();
                 }
                 stack11.push(operation);
-             }
-         }   
-    }
-    while (!stack11.isEmpty()) {
-        rezult += stack11.get();
-        stack11.pop();
-    }
-    rezult = spases(rezult);
-    return rezult;
+           }
+       }   
+  }
+  while (!stack11.isEmpty()) {
+      rezult += stack11.get();
+      stack11.pop();
+  }
+  rezult = spases(rezult);
+  return rezult;
 }
 
 int vashislenia(const int& x, const int& y, const int& op) {
