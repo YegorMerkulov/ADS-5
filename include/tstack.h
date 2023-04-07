@@ -1,8 +1,8 @@
 // Copyright 2021 NNTU-CS
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
-
-template<typename T, int size>
+#include <string>
+template<typename Type, int size>
 class TStack {
  private:
     Type arr[100];
