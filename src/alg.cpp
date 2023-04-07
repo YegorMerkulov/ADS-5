@@ -2,40 +2,6 @@
 #include <string>
 #include <map>
 #include "tstack.h"
-int getP(char o) {
-  switch (o) {
-    case ('('):
-      return 0;
-      break;
-    case (')'):
-      return 1;
-      break;
-    case ('+'):
-      return 2;
-      break;
-    case ('-'):
-      return 2;
-      break;
-    case ('*'):
-      return 3;
-      break;
-    case ('/'):
-      return 3;
-      break;
-    default:
-      return -1;
-      break;
-  }
-}
-std::string spases(const std::string& str) {
-    if (2 >= str.length()) return str;
-    int num = 2 - str.length() % 2;
-    std::string rz(str, 0, num);
-    for (auto it = str.begin() + num; it != str.end();) {
-        rz += ' '; rz += *it++;;
-    }
-    return rz;
-}
 std::string infx2pstfx(std::string inf) {
   std::string r;
     TStack<char, 100> stack11;
