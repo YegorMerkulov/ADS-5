@@ -39,7 +39,7 @@ std::string infx2pstfx(std::string inf) {
   std::string rezult;
   TStack<char, 100> stack11;
   for (auto& operation : inf) {
-        int priori = getPriori(operation);
+      int priori = getPriori(operation);
         if (priori == -1) {
             rezult += operation;
         } else {
