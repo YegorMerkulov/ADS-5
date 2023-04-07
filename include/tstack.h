@@ -5,10 +5,10 @@
 template<typename Type, int size>
 class TStack {
  private:
-   Type arr[100];
-   int top;
+    Type arr[100];
+    int top;
    
-public:
+ public:
     TStack() :top(-1) {}
     void push(Type value) {
       if (isFull()) {
@@ -33,5 +33,6 @@ public:
     bool isFull()const {
       return top == size - 1;
     }
+   
 };
 #endif  // INCLUDE_TSTACK_H_
