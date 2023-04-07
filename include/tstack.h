@@ -16,7 +16,7 @@ class TStack {
       } else {
         arr[++top] = value;
       }
-    }
+    } 
     const Type& pop() {
       if (isEmpty()) {
         throw std::string("Empty!");
@@ -33,6 +33,6 @@ class TStack {
     bool isFull()const {
       return top == size - 1;
     }
-};
+};  
 #endif // INCLUDE_TSTACK_H_
 
