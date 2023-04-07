@@ -7,14 +7,14 @@ class TStack {
  private:
     Type arr[100];
     int top;
-   
+
  public:
     TStack() :top(-1) {}
     void push(Type value) {
       if (isFull()) {
         throw std::string("Full!");
-        } else {
-          arr[++top] = value;
+      } else {
+        arr[++top] = value;
       }
     }
     const Type& pop() {
@@ -32,6 +32,7 @@ class TStack {
     }
     bool isFull()const {
       return top == size - 1;
-    }   
+    }
 };
-#endif  // INCLUDE_TSTACK_H_
+#endif // INCLUDE_TSTACK_H_
+
