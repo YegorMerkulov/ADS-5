@@ -96,6 +96,7 @@ int eval(std::string pref) {
   case'/': return a / b;
   }
   return 0;
+  }
 }
 
 int eval(std::string pref) {
