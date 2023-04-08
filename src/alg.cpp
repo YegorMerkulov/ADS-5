@@ -98,8 +98,6 @@ std::string infx2pstfx(std::string inf) {
   return std::string("");
 }
 
-int eval(std::string pref) {
-  // добавьте код
   int eval(std::string prf) {
     TStack <int, 100> stInt;
     std::string rez = "";
@@ -125,5 +123,4 @@ int eval(std::string pref) {
   }
   return stInt.get();
 }
-  return 0;
-}
+
