@@ -4,11 +4,11 @@
 #include <string>
 template<typename Type, int size>
 class TStack {
- private:
+  private:
     Type arr[100];
     int top;
     
- public:
+  public:
     TStack() :top(-1) {}
     void push(Type value) {
       if (isFull()) {
