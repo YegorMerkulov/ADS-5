@@ -6,10 +6,11 @@
 
 template<typename T, int size>
 class TStack {
+  // добавьте код стека
  private:
   T arr[100];
   int top;
-  
+
  public:
   TStack() : top(-1) {}
 
@@ -36,4 +37,5 @@ class TStack {
         return top == size - 1;
     }
 };
+
 #endif  // INCLUDE_TSTACK_H_
