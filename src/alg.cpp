@@ -83,8 +83,6 @@ std::string infx2pstfx(std::string inf) {
   postfixStr = Spaces(postfixStr);
   return postfixStr;
 }
-  return std::string("");
-}
 
 int eval(std::string pref) {
   // добавьте код
