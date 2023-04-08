@@ -5,26 +5,25 @@
 template<typename Type, int size>
 class TStack {
  private:
-  T arr[100];
-  int top;
+   Type arr[100];
+   int top;
 
  public:
-  TStack() : top(-1) {}
-
-  void push(T value) {
-      if (isFull()) {
-          throw std::string("Stack is full");
-      } else {
-          arr[++top] = value;
-      }
+   TStack() : top(-1) {}
+   void push(Type value) {
+     if (isFull()) {
+       throw std::string("Stack is full");
+     } else {
+       arr[++top] = value;
+     }   
   }
-    const T& pop() {
-        if (isEmpty())
-            throw std::string("Stack is empty");
+  const Type& pop() {
+    if (isEmpty())
+      throw std::string("Stack is empty");
         else
             return arr[top--];
     }
-    const T& get()const {
+    const Type& get()const {
         return arr[top];
     }
     bool isEmpty()const {
