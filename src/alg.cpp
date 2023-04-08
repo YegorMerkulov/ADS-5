@@ -1,118 +1,127 @@
 // Copyright 2021 NNTU-CS
+#include <string>
 #include <map>
 #include "tstack.h"
-int getPriori(char operation) {
+
+int Priority(char operation) {
+  std::pair<char, int> priority[6];
   switch (operation) {
-    case ('('):
-      return 0;
-      break;
-    case (')'):
-      return 1;
-      break;
-    case ('+'):
-      return 2;
-      break;
-    case ('-'):
-      return 2;
-      break;
-    case ('*'):
-      return 3;
-      break;
-    case ('/'):
-      return 3;
-      break;
-    default:
-      return -1;
-      break;
+  case'(':
+    priority[0].first = '(';
+    priority[0].second = 0;
+  case')':
+    priority[1].first = ')';
+    priority[1].second = 1;
+  case'+':
+    priority[2].first = '+';
+    priority[2].second = 2;
+  case'-':
+    priority[3].first = '-';
+    priority[3].second = 2;
+  case'*':
+    priority[4].first = '*';
+    priority[4].second = 3;
+  case'/':
+    priority[5].first = '/';
+    priority[5].second = 3;
   }
-}
-std::string spases(const std::string& str) {
-    if (2 >= str.length()) return str;
-    int num = 2 - str.length() % 2;
-    std::string rez(str, 0, num);
-    for (auto it = str.begin() + num; it != str.end();) {
-        rez += ' '; rez += *it++;;
+  int p = -1;
+  for (int j = 0; j < 6; ++j) {
+    if (operation == priority[j].first) {
+      p = priority[j].second;
+      break;
     }
-    return rez;
+  }
+  return p;
 }
+
+std::string Spaces(const std::string& str) {
+  if (str.length() <= 2)
+    return str;
+  int n = 2 - str.length() % 2;
+  std::string adjustStr(str, 0, n);
+  for (auto it = str.begin() + n; it != str.end();) {
+    adjustStr += ' '; adjustStr += *it++;;
+  }
+  return adjustStr;
+}
+
 std::string infx2pstfx(std::string inf) {
-    std::string rezult;
-    TStack<char, 100> stack11;
-    for (auto& operation : inf) {
-        int priori = getPriori(operation);
-        if (priori == -1) {
-            rezult += operation;
-        } else {
-            if (stack11.get() < priori || priori == 0 || stack11.isEmpty()) {
-                stack11.push(operation);
-            } else if (operation == ')') {
-                char summa = stack11.get();
-                while (getPriori(summa) >= priori) {
-                    rezult += summa;
-                    stack11.pop();
-                    summa = stack11.get();
-                }
-                stack11.pop();
-            } else {
-                char summa = stack11.get();
-                while (getPriori(summa) >= priori) {
-                    rezult += summa;
-                    stack11.pop();
-                    summa = stack11.get();
-                }
-                stack11.push(operation);
-            }
-        }   
-   }
-   while (!stack11.isEmpty()) {
-       rezult += stack11.get();
-       stack11.pop();
-   }
-   rezult = spases(rezult);
-   return rezult;
-}  
-
-int vashislenia(const int& x, const int& y, const int& op) {
-    switch (op) {
-    case'+': return x + y;
-    case'-': return x - y;
-    case'*': return x * y;
-    case'/': return x / y;
-    default:
-        break;
-    }
-    return 0;
-}
-
-int eval(std::string post) {
-    TStack<int, 100> stack12;
-    std::string number = "";
-    for (int i = 0; i < post.size(); i++) {
-        if (getPriori(post[i]) == -1) {
-            if (post[i] == ' ') {
-                continue;
-            } else if (isdigit(post[i + 1])) {
-                number += post[i];
-                continue;
-            } else {
-                number += post[i];
-                stack12.push(atoi(number.c_str()));
-                number = "";
-            }
-        } else {
-            int y = stack12.get();
-            stack12.pop();
-            int x = stack12.get();
-            stack12.pop();
-            stack12.push(vashislenia(x, y, post[i]));
+  // добавьте код
+  std::string postfixStr;
+  TStack<char, 100> stack;
+  for (auto& operation : inf) {
+    int priority = Priority(operation);
+    if (priority == -1) {
+      postfixStr += operation;
+    } else {
+      if (stack.get() < priority || priority == 0 || stack.isEmpty()) {
+        stack.push(operation);
+      } else if (operation == ')') {
+        char character = stack.get();
+        while (Priority(character) >= priority) {
+          postfixStr += character;
+          stack.pop();
+          character = stack.get();
         }
+        stack.pop();
+      } else {
+        char character = stack.get();
+        while (Priority(character) >= priority) {
+          postfixStr += character;
+          stack.pop();
+          character = stack.get();
+        }
+        stack.push(operation);
+      }
     }
-    return stack12.get();
+  }
+  while (!stack.isEmpty()) {
+    postfixStr += stack.get();
+    stack.pop();
+  }
+  postfixStr = Spaces(postfixStr);
+  return postfixStr;
+}
+  return std::string("");
 }
 
+int eval(std::string pref) {
+  // добавьте код
+  int calculate(const int& a, const int& b, const int& oper) {
+  switch (oper) {
+  default:
+    break;
+  case'+': return a + b;
+  case'-': return a - b;
+  case'*': return a * b;
+  case'/': return a / b;
+  }
+  return 0;
+}
 
-  
-      
-      
-      
-      
+int eval(std::string pref) {
+  TStack<int, 100> stack;
+  std::string number = "";
+  for (size_t i = 0; i < pref.size(); i++) {
+    if (Priority(pref[i]) == -1) {
+      if (pref[i] == ' ') {
+        continue;
+      } else if (isdigit(pref[i + 1])) {
+        number += pref[i];
+        continue;
+      } else {
+        number += pref[i];
+        stack.push(atoi(number.c_str()));
+        number = "";
+      }
+    } else {
+      int b = stack.get();
+      stack.pop();
+      int a = stack.get();
+      stack.pop();
+      stack.push(calculate(a, b, pref[i]));
+    }
+  }
+  return stack.get();
+}
