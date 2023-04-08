@@ -3,124 +3,122 @@
 #include <map>
 #include "tstack.h"
 
-int Priority(char operation) {
+int getPrior(char op) {
   std::pair<char, int> priority[6];
-  switch (operation) {
-  case'(':
-    priority[0].first = '(';
-    priority[0].second = 0;
-  case')':
-    priority[1].first = ')';
-    priority[1].second = 1;
-  case'+':
-    priority[2].first = '+';
-    priority[2].second = 2;
-  case'-':
-    priority[3].first = '-';
-    priority[3].second = 2;
-  case'*':
-    priority[4].first = '*';
-    priority[4].second = 3;
-  case'/':
-    priority[5].first = '/';
-    priority[5].second = 3;
+  switch (op) {
+    case'(':
+      priority[0].first = '(';
+      priority[0].second = 0;
+    case')':
+      priority[1].first = ')';
+      priority[1].second = 1;
+    case'+':
+      priority[2].first = '+';
+      priority[2].second = 2;
+    case'-':
+      priority[3].first = '-';
+      priority[3].second = 2;
+    case'*':
+      priority[4].first = '*';
+      priority[4].second = 3;
+    case'/':
+      priority[5].first = '/';
+      priority[5].second = 3;
   }
-  int p = -1;
+  int prior = -1;
   for (int j = 0; j < 6; ++j) {
-    if (operation == priority[j].first) {
-      p = priority[j].second;
+    if (op == priority[j].first) {
+      prior = priority[j].second;
       break;
     }
   }
-  return p;
+  return prior;
 }
 
-std::string Spaces(const std::string& str) {
-  if (str.length() <= 2)
-    return str;
-  int n = 2 - str.length() % 2;
-  std::string adjustStr(str, 0, n);
-  for (auto it = str.begin() + n; it != str.end();) {
-    adjustStr += ' '; adjustStr += *it++;;
+std::string miracle1(const std::string& s) {
+  if (s.length() <= 2) return s;
+  int n = 2 - s.length() % 2;
+  std::string r(s, 0, n);
+  for (auto it = s.begin() + n; it != s.end();) {
+    r += ' '; r += *it++;;
   }
-  return adjustStr;
+  return r;
 }
 
 std::string infx2pstfx(std::string inf) {
-  // добавьте код
-  std::string postfixStr;
-  TStack<char, 100> stack;
-  for (auto& operation : inf) {
-    int priority = Priority(operation);
-    if (priority == -1) {
-      postfixStr += operation;
+  std::string work;
+  Tstack<char, 100> stack1;
+  for (auto& op : inf) {
+    int prior = getPrior(op);
+    if (prior == -1) {
+      work += op;
     } else {
-      if (stack.get() < priority || priority == 0 || stack.isEmpty()) {
-        stack.push(operation);
-      } else if (operation == ')') {
-        char character = stack.get();
-        while (Priority(character) >= priority) {
-          postfixStr += character;
-          stack.pop();
-          character = stack.get();
+      if (stack1.get() < prior || prior == 0 || stack1.isEmpty()) {
+        stack1.push(op);
+      } else if (op == ')') {
+        char sm = stack1.get();
+        while (getPrior(sm) >= prior) {
+          work += sm;
+          stack1.pop();
+          sm = stack1.get();
         }
-        stack.pop();
+        stack1.pop();
       } else {
-        char character = stack.get();
-        while (Priority(character) >= priority) {
-          postfixStr += character;
-          stack.pop();
-          character = stack.get();
+        char sm = stack1.get();
+        while (getPrior(sm) >= prior) {
+          work += sm;
+          stack1.pop();
+          sm = stack1.get();
         }
-        stack.push(operation);
+        stack1.push(op);
       }
     }
   }
-  while (!stack.isEmpty()) {
-    postfixStr += stack.get();
-    stack.pop();
+  while (!stack1.isEmpty()) {
+    work += stack1.get();
+    stack1.pop();
   }
-  postfixStr = Spaces(postfixStr);
-  return postfixStr;
+  work = miracle1(work);
+  return work;
+}
+  return std::string("");
 }
 
 int eval(std::string pref) {
-  // добавьте код
-int calculate(const int& a, const int& b, const int& oper) {
+  int count(const int& a, const int& b, const int& oper) {
   switch (oper) {
-  default:
-    break;
-  case'+': return a + b;
-  case'-': return a - b;
-  case'*': return a * b;
-  case'/': return a / b;
+    default:
+      break;
+    case'+': return a + b;
+    case'-': return a - b;
+    case'*': return a * b;
+    case'/': return a / b;
   }
   return 0;
 }
-}
 
-int eval(std::string pref) {
-  TStack<int, 100> stack;
-  std::string number = "";
+  int eval(std::string pref) {
+  Tstack<int, 100> stack1;
+  std::string num = "";
   for (size_t i = 0; i < pref.size(); i++) {
-    if (Priority(pref[i]) == -1) {
+    if (getPrior(pref[i]) == -1) {
       if (pref[i] == ' ') {
         continue;
       } else if (isdigit(pref[i + 1])) {
-        number += pref[i];
+        num += pref[i];
         continue;
       } else {
-        number += pref[i];
-        stack.push(atoi(number.c_str()));
-        number = "";
+        num += pref[i];
+        stack1.push(atoi(num.c_str()));
+        num = "";
       }
     } else {
-      int b = stack.get();
-      stack.pop();
-      int a = stack.get();
-      stack.pop();
-      stack.push(calculate(a, b, pref[i]));
+      int b = stack1.get();
+      stack1.pop();
+      int a = stack1.get();
+      stack1.pop();
+      stack1.push(count(a, b, pref[i]));
     }
   }
-  return stack.get();
+  return stack1.get();
 }
