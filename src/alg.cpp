@@ -51,11 +51,11 @@ std::string space(const std::string& s) {
   if (s.length() <= 2)
     return s;
   int n = 2 - s.length() % 2;
-  std::string right(s, 0, n);
+  std::string r(s, 0, n);
   for (auto it = s.begin() + n; it != s.end();) {
-    right += ' '; right += *it++;;
+    r += ' '; r += *it++;;
   }
-  return right;
+  return r;
 }
 
 std::string infx2pstfx(std::string inf) {
@@ -95,23 +95,21 @@ std::string infx2pstfx(std::string inf) {
   pstfx = space(pstfx);
   return pstfx;
 }
-  return std::string("");
-}
 
   int eval(std::string prf) {
     TStack <int, 100> stInt;
-    std::string rez = "";
+    std::string r = "";
     for (size_t i = 0; i < prf.size(); i++) {
         if (getPrior(prf[i]) == -1) {
             if (prf[i] == ' ') {
                 continue;
             } else if (isdigit(prf[i + 1])) {
-                rez += prf[i];
+                r += prf[i];
                 continue;
             } else {
-                rez += prf[i];
-                stInt.push(atoi(rez.c_str()));
-                rez = "";
+                r += prf[i];
+                stInt.push(atoi(r.c_str()));
+                r = "";
             }
         } else {
           int b = stInt.get();
