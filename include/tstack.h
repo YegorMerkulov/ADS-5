@@ -6,6 +6,7 @@
 
 template<typename T, int size>
 class TStack {
+  // добавьте код стека
  private:
   T arr[100];
   int top;
@@ -35,6 +36,6 @@ class TStack {
     bool isFull()const {
         return top == size - 1;
     }
-};
+}; 
 
 #endif  // INCLUDE_TSTACK_H_
