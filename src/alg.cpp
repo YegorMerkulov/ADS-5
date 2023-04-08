@@ -86,7 +86,7 @@ std::string infx2pstfx(std::string inf) {
 
 int eval(std::string pref) {
   // добавьте код
-  int calculate(const int& a, const int& b, const int& oper) {
+int calculate(const int& a, const int& b, const int& oper) {
   switch (oper) {
   default:
     break;
@@ -96,7 +96,7 @@ int eval(std::string pref) {
   case'/': return a / b;
   }
   return 0;
-  }
+}
 }
 
 int eval(std::string pref) {
