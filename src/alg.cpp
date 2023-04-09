@@ -54,7 +54,7 @@ std::string Space(const std::string& s) {
   int n = 2 - s.length() % 2;
   std::string r(s, 0, n);
   for (auto i = s.begin() + n; i != s.end();) {
-    r += ' '; 
+    r += ' ';
     r += *i++;
   }
   return r;
