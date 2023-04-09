@@ -59,7 +59,7 @@ std::string infx2pstfx(std::string inf) {
         stack1.push(op);
       } else if (op == ')') {
         char sm = stack1.get();
-        while (getPrior(sm) >= prior) {
+        while (GetPrior(sm) >= prior) {
           work += sm;
           stack1.pop();
           sm = stack1.get();
@@ -67,7 +67,7 @@ std::string infx2pstfx(std::string inf) {
         stack1.pop();
       } else {
         char sm = stack1.get();
-        while (getPrior(sm) >= prior) {
+        while (GetPrior(sm) >= prior) {
           work += sm;
           stack1.pop();
           sm = stack1.get();
@@ -100,7 +100,7 @@ int eval(std::string pref) {
 TStack<int, 100> stack1;
   std::string num = "";
   for (size_t i = 0; i < pref.size(); i++) {
-    if (getPrior(pref[i]) == -1) {
+    if (GetPrior(pref[i]) == -1) {
       if (pref[i] == ' ') {
         continue;
       } else if (isdigit(pref[i + 1])) {
