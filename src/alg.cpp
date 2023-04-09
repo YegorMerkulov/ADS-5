@@ -51,7 +51,7 @@ std::string infx2pstfx(std::string inf) {
   std::string work;
   TStack<char, 100> stack1;
   for (auto& op : inf) {
-    int prior = getPrior(op);
+    int prior = GetPrior(op);
     if (prior == -1) {
       work += op;
     } else {
@@ -80,7 +80,7 @@ std::string infx2pstfx(std::string inf) {
     work += stack1.get();
     stack1.pop();
   }
-  work = spacee(work);
+  work = Space(work);
   return work;
 }
 
